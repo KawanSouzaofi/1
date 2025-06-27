@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Troca de Imagem com Transição</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carro Interativo</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="image-container">
-            <img id="imagem" class="imagem-principal" src="azul_roda_1-removebg-preview.png" alt="Imagem Inicial">
-            <img id="imagem-auxiliar" class="imagem-auxiliar" src="azul_roda_1-removebg-preview.png" alt="Imagem Inicial">
-        </div>
+  <div class="carro-area">
+    <img id="imagem" class="imagem-principal" src="azul_roda_1-removebg-preview.png" alt="Carro">
+    <img id="imagem-auxiliar" class="imagem-auxiliar" src="azul_roda_1-removebg-preview.png" alt="Carro Aux">
+  </div>
 
-        <div class="buttons">
-            <button id="btn-azul">Azul</button>
-            <button id="btn-amarelo">Amarelo</button>
-            <button id="btn-angulo">Trocar Ângulo</button> <!-- Botão para trocar o ângulo -->
-        </div>
+  <div class="painel">
+    <div class="grupo">
+      <div class="titulo">COR</div>
+      <div class="opcoes">
+        <button id="btn-amarelo" class="cor-btn amarelo"></button>
+        <button id="btn-azul" class="cor-btn azul"></button>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="grupo">
+      <div class="titulo">RODA</div>
+      <div class="opcoes">
+        <button id="btn-roda1" class="roda-btn">
+          <img src="roda.png" alt="Roda 1">
+        </button>
+        <button id="btn-roda2" class="roda-btn">
+          <img src="roda.png" alt="Roda 2">
+        </button>
+      </div>
+    </div>
+
+    <div class="grupo vertical">
+      <button id="btn-posicao" class="pos-btn">POSIÇÃO</button>
+      <button id="btn-som" class="luz-btn">SOM: ON</button>
+    </div>
+  </div>
+
+  <audio id="musica" src="musica1.mp3" loop autoplay></audio>
+
+  <script src="script.js"></script>
 </body>
 </html>
