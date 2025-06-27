@@ -1,85 +1,99 @@
-/* Estilo Geral */
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
+  margin: 0;
+  background-color: #90caf9; /* fundo inicial azul (combina com carro azul) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
 }
 
-/* Centralizando a imagem e os botões */
-.container {
-    text-align: center;
-    position: relative;
+.carro-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 90%;
 }
 
-/* Ajustando o tamanho do contêiner para ser maior */
-.image-container {
-    position: relative;
-    width: 1000px;  /* Aumentando a largura */
-    height: 800px; /* Aumentando a altura */
-    overflow: hidden; /* Garantir que as imagens não saiam do contêiner */
+.imagem-principal,
+.imagem-auxiliar {
+  position: absolute;
+  width: 50%;
+  object-fit: contain;
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 }
 
-/* Estilo das imagens */
-#imagem,
-#imagem-auxiliar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;    /* Aumentando para 100% da largura do contêiner */
-    height: 100%;   /* Aumentando para 100% da altura do contêiner */
-    object-fit: contain;    /* Garantindo que a imagem se ajuste sem cortar */
-    object-position: center; /* Centralizando as imagens dentro do contêiner */
-    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+.imagem-auxiliar {
+  opacity: 0;
+  transform: translateY(100%);
 }
 
-/* Classe para desativar a transição */
-.no-transition {
-    transition: none; /* Desabilita qualquer transição */
+.painel {
+  display: flex;
+  background: #444;
+  width: 100%;
+  padding: 10px;
+  justify-content: space-around;
+  align-items: center;
 }
 
-/* Começa com a imagem auxiliar invisível */
-#imagem-auxiliar {
-    opacity: 0;
-    transform: translateX(100%); /* Começa à direita, fora da tela */
+.grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
 }
 
-/* Estilo dos Botões */
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+.opcoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+.cor-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.cor-btn.amarelo {
+  background: radial-gradient(circle at center, #ffeb3b, #ffc107);
+}
+
+.cor-btn.azul {
+  background: radial-gradient(circle at center, #2196f3, #00bcd4);
+}
+
+.roda-btn {
+  background: #ccc;
+  border: none;
+  border-radius: 8px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.roda-btn img {
+  width: 40px;
+  height: 40px;
+}
+
+.pos-btn,
+.luz-btn {
+  padding: 10px 20px;
+  margin: 5px 0;
+  background: #666;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button:hover {
-    opacity: 0.8;
+  opacity: 0.8;
+  transform: translateY(-2px);
 }
 
-/* Estilo dos Botões Específicos */
-#btn-azul {
-    background-color: blue;
-    color: white;
-}
-
-#btn-amarelo {
-    background-color: yellow;
-    color: black;
-}
-
-#btn-angulo {
-    background-color: gray;
-    color: white;
-}
