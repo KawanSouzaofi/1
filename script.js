@@ -1,69 +1,76 @@
-// Seleciona os botões e as imagens
-const btnAzul = document.getElementById('btn-azul');
+const imgMain = document.getElementById('imagem');
+const imgAux = document.getElementById('imagem-auxiliar');
 const btnAmarelo = document.getElementById('btn-amarelo');
-const btnAngulo = document.getElementById('btn-angulo');
-const imagemPrincipal = document.getElementById('imagem');
-const imagemAuxiliar = document.getElementById('imagem-auxiliar');
+const btnAzul = document.getElementById('btn-azul');
+const btnRoda1 = document.getElementById('btn-roda1');
+const btnRoda2 = document.getElementById('btn-roda2');
+const btnPos = document.getElementById('btn-posicao');
+const btnSom = document.getElementById('btn-som');
+const musica = document.getElementById('musica');
 
-// Variáveis para armazenar a cor atual
-let corAtual = 'azul'; // Inicialmente, a cor é azul
-let anguloAtual = false; // Variável para verificar se a rotação foi ativada
+let corAtual = 'azul';
+let rodaAtual = 1;
+let anguloAtual = false;
+let somLigado = true;
 
-// Função para trocar a imagem com efeito de transição
-function trocarImagem(novaImagem) {
-    // Começa a animação de deslizamento
-    imagemAuxiliar.style.transform = 'translateX(0)';  // A imagem vai deslizar da direita para a esquerda
-    imagemAuxiliar.style.opacity = 1;  // A imagem auxiliar aparece
-
-    // A imagem principal desaparece e sai da tela
-    imagemPrincipal.style.transform = 'translateX(-100%)';  // A imagem principal vai para a esquerda (fora da tela)
-    imagemPrincipal.style.opacity = 0;
-
-    // Após a animação, a imagem principal troca de src e volta à posição original
-    setTimeout(() => {
-        imagemPrincipal.src = novaImagem;
-        imagemPrincipal.style.transform = 'translateX(0)';  // A imagem volta ao centro
-        imagemPrincipal.style.opacity = 1;  // A imagem volta a aparecer
-    }, 1000); // O tempo da transição de 1 segundo
-
-    // Imagem auxiliar retorna para fora da tela à direita
-    setTimeout(() => {
-        imagemAuxiliar.style.transform = 'translateX(100%)';  // Move a imagem auxiliar para fora
-        imagemAuxiliar.style.opacity = 0;  // A imagem auxiliar desaparece
-    }, 1000); // O tempo da transição de 1 segundo
+function gerarNome() {
+  const suf = anguloAtual ? '_T' : '';
+  return `${corAtual}_roda_${rodaAtual}${suf}-removebg-preview.png`;
 }
 
-// Função para trocar o ângulo sem transição
-function trocarAngulo() {
-    // Remove a transição antes de mudar a imagem
-    imagemPrincipal.classList.add('no-transition');
-    
-    // Troca a imagem para o novo ângulo, mantendo a cor atual
-    if (corAtual === 'azul') {
-        imagemPrincipal.src = 'azul_roda_1T-removebg-preview.png'; // Novo ângulo com a cor azul
-    } else if (corAtual === 'amarelo') {
-        imagemPrincipal.src = 'amarelo_roda_1T-removebg-preview.png'; // Novo ângulo com a cor amarela
-    }
-
-    // Após a troca da imagem, removemos a classe `no-transition` para permitir transições futuras
-    setTimeout(() => {
-        imagemPrincipal.classList.remove('no-transition');
-    }, 0); // O tempo de delay é 0 para garantir que a transição seja restaurada imediatamente
+function atualizarFundo() {
+  document.body.style.backgroundColor = corAtual === 'azul' ? '#90caf9' : '#fff59d';
 }
 
-// Evento de clique para o botão "Azul"
-btnAzul.addEventListener('click', () => {
-    corAtual = 'azul'; // Armazena a cor selecionada
-    trocarImagem('azul_roda_1-removebg-preview.png'); // Imagem azul
-});
+function trocarImagem() {
+  const nova = gerarNome();
+  imgAux.src = nova;
+  imgAux.style.transform = 'translateY(0)';
+  imgAux.style.opacity = 1;
+  imgMain.style.opacity = 0;
 
-// Evento de clique para o botão "Amarelo"
+  setTimeout(() => {
+    imgMain.src = nova;
+    imgMain.style.opacity = 1;
+    imgAux.style.opacity = 0;
+    imgAux.style.transform = 'translateY(100%)';
+  }, 1000);
+}
+
 btnAmarelo.addEventListener('click', () => {
-    corAtual = 'amarelo'; // Armazena a cor selecionada
-    trocarImagem('amarelo_roda_1-removebg-preview.png'); // Imagem amarela
+  corAtual = 'amarelo';
+  atualizarFundo();
+  trocarImagem();
 });
 
-// Evento de clique para o botão "Trocar Ângulo"
-btnAngulo.addEventListener('click', () => {
-    trocarAngulo(); // Troca o ângulo sem transição
+btnAzul.addEventListener('click', () => {
+  corAtual = 'azul';
+  atualizarFundo();
+  trocarImagem();
+});
+
+btnRoda1.addEventListener('click', () => {
+  rodaAtual = 1;
+  trocarImagem();
+});
+
+btnRoda2.addEventListener('click', () => {
+  rodaAtual = 2;
+  trocarImagem();
+});
+
+btnPos.addEventListener('click', () => {
+  anguloAtual = !anguloAtual;
+  trocarImagem();
+});
+
+btnSom.addEventListener('click', () => {
+  if (somLigado) {
+    musica.pause();
+    btnSom.textContent = 'SOM: OFF';
+  } else {
+    musica.play();
+    btnSom.textContent = 'SOM: ON';
+  }
+  somLigado = !somLigado;
 });
